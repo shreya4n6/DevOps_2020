@@ -1,0 +1,53 @@
+# DevOps_2020
+DevOps Summer INternship 2020
+
+## TASK 1 FOR CREATING MULTIPLE DIRECTRIES
+# THE SOLUTION IS:
+
+mkdir -p a/{b/{d/{i/m/z,j/l/z},e/h/l/z},c/{f/h/l/z,g/k/l/z}
+
+## TASK 2 FOR CREATING AN USER AND ALLOW THE USER TO RUN THE DATE COMMAND ON;Y. NO OTHER USER CAN HAVE ACCESS TO IT.
+# THE SOLUTION IS:
+
+date
+which date
+chmod a-x /usr/bin/date
+ls -l /usr/bin/date
+useradd -s /usr/bin/date Bony
+setfacl -m u:Bony:rwx /usr/bin/date
+su - Bony
+setfacl -m u:root:--- /usr/bin/date
+chmod -x /usr/bin/date 
+date
+
+## TASK 3 TO CREATE TWO USERS A AND B AND CREATE A FOLDER AND A FILE UNDER THAT FOLDER AND THEN COPY THE FOLDER AND FILE OF A TO B AND VISE VERSA
+# THE SOLUTION IS:
+
+useradd a
+useradd b
+visudo(Entry of user a and b in visudo i.e, the sudoers file)
+su - a
+mkdir Pengu
+cd Pengu
+touch Pengu.txt
+sudo cp -r /home/a/Pengu /home/b
+exit
+su - b
+mkdir Moon
+cd Moon
+touch Moon.txt
+sudo cp -r /home/b/Moon /home/a
+exit
+
+## TASK 4 TO EXECUTE THE CAL COMMAND FOR 10 SECS NON STOP AND STORE THE OUTPUT IN /tmp/a.txt
+# THE SOLUTION IS:
+
+
+
+
+
+
+
+
+
+
