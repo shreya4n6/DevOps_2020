@@ -41,7 +41,8 @@ exit
 
 ## TASK 4 TO EXECUTE THE CAL COMMAND FOR 10 SECS NON STOP AND STORE THE OUTPUT IN /tmp/a.txt
 # THE SOLUTION IS:
-
+for i in 0 1 2 3 4 5 6 7 8 9; do cal>>/tmp/a.txt;done
+cat adhoc
 
 
 
