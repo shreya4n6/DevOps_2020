@@ -1,0 +1,53 @@
+1.# TASK1
+Write python/shell script to launch 100 containers that keeps running even after reboot
+>> THE SOLUTION IS:
+# docker images
+# docker container stop $(docker container ls -aq)
+# docker container rm $(docker container ls -aq)
+# nano ./name.sh
+!/bin/bash
+count=1
+while [ $count -le 100 ]
+do
+  if [ $count -lt 26 ]
+  then
+      docker container run -d --restart unless-stopped --name adhocnw$count alpine ping 8.8.8.8
+  elif [[ ( $count -ge 26 ) && ( $count -le 50 ) ]]
+  then
+     docker container run -d --restart unless-stopped --name adhocnw$count centos ping 8.8.8.8
+  elif [[ ( $count -ge 51 ) && ( $count -le 75 ) ]]
+  then
+     docker container run -d --restart unless-stopped --name adhocnw$count fedora ping 8.8.8.8
+  else [[ ( $count -ge 76 ) && ( $count -le 100 ) ]]
+     docker container run -d --restart unless-stopped --name adhocnw$count java ping 8.8.8.8
+  fi
+  ((count++))
+done
+ # ./name.sh 
+
+2. TASK 2
+Write a combination of Docker and OS commands to get list of Name,Created of all containers and store them in a list
+>> THE SOLUTION IS:
+
+sudo docker ps -a | awk 'print{ $14, $5$6$7$8 }' >> file
+
+3. TASK 3
+Run a container from local system using custom build Docker Image with parent process as firefox
+>> THE SOLUTION IS:
+
+docker pull centos:7
+docker run -it --name=vish centos:7
+yum install firefox -y
+mkdir DockerFile
+cd DockerFile
+vim Dockerfile
+ -FROM centos:7
+ -RUN yum install firefox -y
+ -CMD ["/usr/bin/firefox"]
+ docker build -t firefox.
+ docker run -it --env="DISPLAY" --net=host firefox
+ 4. TASK 4
+ get RAM & CPU consumption from 100 containers and store in text file
+>> THE SOLUTION IS:
+
+docker ps -q | xargs  docker stats --no-stream > pengu.txt
