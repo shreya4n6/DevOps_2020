@@ -1,0 +1,7 @@
+ques: kuch aisa command run karo jisse container apne aap update ho jaae (reboot yourself)
+THE JAWAB IS BELOW:
+docker pull v2tec/watchtower
+docker run -d \
+  --name watchtower \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  v2tec/watchtower
