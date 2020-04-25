@@ -1,3 +1,17 @@
 QUES:Write a Dockerfile
 Install httpd / nginx server
 Run httpd process from a non-root user
+-----------------------------------------------------
+JAWAB NICHE HAZIR HAI:
+
+ cd Desktop/
+vim Dockerfile
+-FROM ubuntu
+-maintainer shreya
+-RUN apt-get update
+-RUN apt-get install sudo
+-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >>/etc/sudoers
+-USER Boni
+docker image build -t task4 .
+docker container run -it --name task4 --network host task4
+
