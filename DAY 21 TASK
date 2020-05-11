@@ -1,0 +1,36 @@
+TASK: Create a docker image and a docker container where ansible is running..Write a playbook which can launch ten 
+alpine containers and then run ping fb.com as the parent process
+
+SOLUTON:
+
+## Creating the Dockerfile using ubuntu as
+FROM ubuntu
+MAINTAINER piyushagarwal.0108@gmail.com
+RUN apt-get update
+RUN apt install ansible -y
+RUN apt install docker.io -y
+COPY container.sh ./
+
+## Creating Container.sh for launching ten alpine based containers
+#!/bin/bash
+count = 1
+while [ $count -le 10 ]
+do
+docker container run -d --name alpine$count alpine fb.com
+((count++))
+done
+
+##Build Docker image as docker image
+  build -t ansible_docker .
+## Launch container as 
+   docker container run -it -v /var/run/docker.sock:/var/run/docker.sock --name ansible_docker ansible_docker bash
+## Creating Ansible Playbook : container.yaml
+---
+ - hosts:
+   tasks:
+    - name: Running 10 containers for ping command
+      script: ./containers.sh
+## Run the playbook using command ````ansible-playbook container.yaml```
+
+## To check the containers running use the command 
+   docker ps/ docker ps -a
